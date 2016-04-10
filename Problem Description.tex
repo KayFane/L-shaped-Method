@@ -1,0 +1,22 @@
+\documentclass[10pt]{article}
+\usepackage[usenames]{color} %used for font color
+\usepackage{amssymb} %maths
+\usepackage{amsmath} %maths
+\usepackage[utf8]{inputenc} %useful to type directly diacritic characters
+
+\begin{document}
+Use L-shaped method to solve the following program:	
+\begin{align*}
+    \text{min}  \quad & 
+    7x_1 + 11x_2 + E_\xi[q_1y_1 + q_2y_2] \\
+    \text{s.t.} \quad &
+    y_1 + 2y_2 \geq d_1 - x_1 \\
+    & y_1 \geq d_2 - x_2 \\
+    & 0 \leq x_1 \leq 10 \\
+    & 0 \leq x_2 \leq 10 \\
+    & y_1 \geq 0 \\
+    & y_2 \geq 0
+\end{align*}
+where $\xi = (q_1, q_2, d_1, d_2)^T$ is $(26, 16, 6, 12)$ and $(14, 24, 10, 4)$ with probability 0.5 each. 
+
+\end{document}

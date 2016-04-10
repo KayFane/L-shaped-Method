@@ -1,0 +1,26 @@
+param q1 := 
+1 26
+2 14
+;
+param q2 := 
+1 16
+2 24
+;
+
+param nSCEN := 2;
+set SCEN := 1 2;
+
+param d1 :=
+1 6
+2 10
+;
+
+param d2 :=
+1 12
+2 4
+;
+
+param p :=
+1 0.5
+2 0.5
+;
