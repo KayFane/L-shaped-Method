@@ -6,9 +6,14 @@ problem Master: x1, x2, theta, MasterObj, Cuts;
 
 problem Sub {s in SCEN}:
 	y1[s], y2[s], SubObj[s], c1[s], c2[s];
+	
+problem Aux {s in SCEN}: 
+     y1_aux[s], y2_aux[s], v1[s], v1_minus[s], v2[s], v2_minus[s], AuxObj[s], aux1[s], aux2[s];
+	
 
 let nCut := 0;
-for {1..4} {
+let nFeas := 0;
+repeat {
     printf "\nITERATION: %d\n\n", nCut;
     let nCut := nCut + 1;
     let scenIx := 0;
@@ -22,7 +27,17 @@ for {1..4} {
 	printf "SCENARIO %d\n", scenIx;
 	display SubObj[s], y1[s], y2[s];
 	display c1[s].dual, c2[s].dual;
-	#display tcoef0[s], tcoef1[s], tcoef2[s];
+	
+	solve Aux[s];
+	printf "\n";
+	display AuxObj[s];
+	display y1_aux[s], y2_aux[s], v1[s], v1_minus[s], v2[s], v2_minus[s];
+	if AuxObj[s] > 0 then {
+	    let nFeas := nFeas + 1;
+		let aux_coef0[nFeas] := d1[s] * aux1[s].dual + d2[s] * aux2[s].dual;
+		let aux_coef1[nFeas] := aux1[s].dual;
+		let aux_coef2[nFeas] := aux2[s].dual;
+		}
     }
     
     let coef0[nCut] := sum {s in SCEN} p[s] * tcoef0[s];
@@ -35,7 +50,7 @@ for {1..4} {
     solve Master;
     printf "\n";
     display MasterObj, theta, x1, x2;
-}
+} while w > theta;
 
 
     
